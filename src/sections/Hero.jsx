@@ -6,6 +6,11 @@ import CanvasLoader from "../components/CanvasLoader.jsx";
 import {useMediaQuery} from "react-responsive";
 import {calculateSizes} from "../constants/index.js";
 import Target from "../components/Target.jsx";
+import ReactLogo from "../components/ReactLogo.jsx";
+import Cube from "../components/Cube.jsx";
+import Rings from "../components/Rings.jsx";
+import HeroCamera from "../components/HeroCamera.jsx";
+import Button from "../components/Button.jsx";
 
 const Hero = () => {
 
@@ -25,21 +30,32 @@ const Hero = () => {
                     <Canvas className="w-full h-full">
                         <Suspense fallback={<CanvasLoader />}>
                             <PerspectiveCamera makeDefault position={[0, 0, 20]}/>
-                            <HackerRoom
-                            //        scale={0.05}
-                            //        position={[0, 0, 0]}
-                            //        rotation={[0, -Math.PI/2 ,0]}
+                            <HeroCamera isMobile = {isMobile}>
+                                <HackerRoom
+                                    //        scale={0.05}
+                                    //        position={[0, 0, 0]}
+                                    //        rotation={[0, -Math.PI/2 ,0]}
                                     position={sizes.deskPosition}
                                     scale={sizes.deskScale}
                                     rotation={[0, -Math.PI, 0]}
-                            />
+                                />
+                            </HeroCamera>
                             <group>
+                                <ReactLogo position = {sizes.reactLogoPosition} />
                                 <Target position = {sizes.targetPosition} />
+                                <Cube position = {sizes.cubePosition} />
+                                <Rings position = {sizes.ringPosition} />
                             </group>
                             <ambientLight intensity= {1}/>
                             <directionalLight position = {[10, 10, 10]} intensity ={0.5}/>
                         </Suspense>
                     </Canvas>
+                </div>
+                <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
+                    <a href="#contact" className="w-fit">
+                        <Button name="Let's work together" isBeam containerClass = "sm:w-fit w-full sm:min-w-96"/>
+
+                    </a>
                 </div>
             </div>
         </section>
