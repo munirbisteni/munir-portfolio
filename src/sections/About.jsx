@@ -13,7 +13,7 @@ const About = () => {
         }, 2000)
     }
     return (
-        <section className="c-space my-20">
+        <section className="c-space my-20" id="about">
             <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
 
                 <div className="col-span-1 xl:row-span-3">
@@ -76,7 +76,11 @@ const About = () => {
                         <img src="/assets/grid3.png" alt="grid-3" className="w-full sm:h-[266px] h-fit object-contain"/>
                         <div>
                             <p className="grid-headtext">My Passion for Coding</p>
-                            <p className="grid-subtext">I love solving problems and build things through code. Coding isn't just my profession - it is my passion.</p>
+                            <p className="grid-subtext">For me, coding is the perfect blend of logic and creativity.
+                                Every challenge is an opportunity to learn, and every project a chance to innovate.
+                                I love crafting solutions that not only function seamlessly but also create real impact.
+                                Whether refining complex systems or designing intuitive user experiences,
+                                programming is where I bring ideas to life. Coding isn't just my profession — it's my passion</p>
                         </div>
                     </div>
                 </div>
