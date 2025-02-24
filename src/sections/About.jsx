@@ -21,8 +21,7 @@ const About = () => {
                         <img src="/assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain"/>
                         <div>
                             <p className="grid-headtext">Hi, I'm Munir</p>
-                            <p className ="grid-subtext">With one year of professional experience,
-                                I'm a full-cycle developer passionate about innovation, solving challenges,
+                            <p className ="grid-subtext">I'm a full-cycle developer passionate about innovation, solving challenges,
                                 and building scalable, cutting-edge software.
                             </p>
                         </div>
