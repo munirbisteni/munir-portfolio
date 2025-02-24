@@ -77,7 +77,7 @@ const Contact = () => {
                                 required
                                 rows={5}
                                 className="field-input"
-                                placeholder="Hi, I wanna give you a job..."
+                                placeholder="Hi, I wanna contact you about..."
                             />
                         </label>
                         <button className="field-btn" type="submit" disabled={loading}>
