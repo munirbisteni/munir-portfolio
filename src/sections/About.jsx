@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useCallback, useRef, useState} from 'react'
 import Globe from "react-globe.gl";
 import Button from "../components/Button.jsx";
 import {contactInfo, techStack} from "../constants/index.js";
@@ -10,6 +10,20 @@ const EMAIL = contactInfo.email;
 const About = () => {
     const {t} = useLanguage();
     const [hasCopied, setHasCopied] = useState(false);
+    const globeRef = useRef();
+
+    // Globo decorativo: gira sozinho e não responde a toque/mouse (no celular atrapalhava a rolagem).
+    const handleGlobeReady = useCallback(() => {
+        const globe = globeRef.current;
+        if (!globe) return;
+        globe.pointOfView({lat: -22.97, lng: -46.99, altitude: 2.2}, 0);
+        const controls = globe.controls();
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.6;
+        controls.enableZoom = false;
+        controls.enableRotate = false;
+        controls.enablePan = false;
+    }, []);
 
     const handleCopy = () => {
         navigator.clipboard.writeText(EMAIL);
@@ -57,8 +71,11 @@ const About = () => {
                 {/* Localização e contato */}
                 <div className="md:col-span-2 xl:col-span-1">
                     <div className="grid-container md:flex-row xl:flex-col md:items-center xl:items-stretch">
-                        <div className="flex justify-center items-center shrink-0">
+                        <div className="flex justify-center items-center shrink-0 pointer-events-none select-none" aria-hidden="true">
                             <Globe
+                                ref={globeRef}
+                                onGlobeReady={handleGlobeReady}
+                                enablePointerInteraction={false}
                                 height={260}
                                 width={260}
                                 backgroundColor="rgba(0,0,0,0)"
