@@ -6,8 +6,7 @@ import {useLanguage} from "../i18n/LanguageContext.jsx";
 
 const EMAIL = contactInfo.email;
 
-// Layout (xl): três colunas. Linha 1: apresentação | tecnologias | localização e contato (ocupa 2 linhas).
-// Linha 2: "código feito para pessoas" ocupando duas colunas, com imagem e texto lado a lado.
+// Layout (xl): três colunas: apresentação | tecnologias | localização e contato.
 const About = () => {
     const {t} = useLanguage();
     const [hasCopied, setHasCopied] = useState(false);
@@ -56,12 +55,12 @@ const About = () => {
                 </div>
 
                 {/* Localização e contato */}
-                <div className="md:col-span-2 xl:col-span-1 xl:row-span-2">
-                    <div className="grid-container md:flex-row xl:flex-col md:items-center xl:items-stretch xl:justify-between">
-                        <div className="flex justify-center items-center shrink-0 xl:flex-1">
+                <div className="md:col-span-2 xl:col-span-1">
+                    <div className="grid-container md:flex-row xl:flex-col md:items-center xl:items-stretch">
+                        <div className="flex justify-center items-center shrink-0">
                             <Globe
-                                height={300}
-                                width={300}
+                                height={260}
+                                width={260}
                                 backgroundColor="rgba(0,0,0,0)"
                                 backgroundImageOpacity={0.5}
                                 showAtmosphere
@@ -101,16 +100,6 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Código feito para pessoas */}
-                <div className="md:col-span-2">
-                    <div className="grid-container lg:flex-row lg:items-center lg:gap-8">
-                        <img src="/assets/grid3.png" alt="" className="w-full lg:w-1/2 sm:h-[220px] h-fit object-contain"/>
-                        <div className="lg:w-1/2">
-                            <p className="grid-headtext">{t.about.peopleTitle}</p>
-                            <p className="grid-subtext">{t.about.peopleText}</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     )

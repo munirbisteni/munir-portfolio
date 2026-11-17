@@ -29,11 +29,18 @@ export const translations = {
             locationText: 'Na região de Campinas. Aberto a oportunidades presenciais, híbridas ou remotas.',
             globeLabel: 'Estou aqui!',
             contactBtn: 'Fale comigo',
-            peopleTitle: 'Código feito para pessoas',
-            peopleText: 'Além do desenvolvimento, curso Psicologia na USF. Estudo como as pessoas usam, aprendem e trabalham, e trago isso para os produtos que construo: levantar requisitos com quem vai usar, acompanhar a implantação e ajustar a partir do uso real.',
             contactLabel: 'Meu e-mail',
             whatsapp: 'WhatsApp',
             copied: 'Copiado!',
+        },
+        motivation: {
+            title: 'O que me motiva',
+            lead: 'Sempre me interessei pela complexidade das pessoas: como pensam, decidem, aprendem e trabalham.',
+            pillars: [
+                {title: 'Pessoas', text: 'Por isso, além de desenvolver, curso Psicologia. Minha iniciação científica junta as duas áreas: uso processamento de linguagem natural para medir personalidade a partir do que as pessoas escrevem.'},
+                {title: 'Ponta a ponta', text: 'Meu forte é enxergar o caminho inteiro, da conversa com quem vai usar até o sistema em produção: levanto requisitos, desenho a solução, desenvolvo, publico e acompanho o uso.'},
+                {title: 'Usuário e cliente', text: 'Busco que a necessidade do usuário e a entrega ao cliente sejam a mesma coisa: software que resolve o problema certo, porque foi construído entendendo quem está do outro lado.'},
+            ],
         },
         projects: {
             title: 'Projetos',
@@ -71,18 +78,13 @@ export const translations = {
             role: 'Desenvolvedor Full-Stack',
             place: 'Campinas, SP',
             period: 'fev 2024 — presente',
-            devTitle: 'Desenvolvimento',
-            dev: [
-                'Levantei os requisitos do setor societário junto à diretoria e desenhei a nova solução (portal do cliente e aplicativo interno), desenvolvida com a equipe sênior. Acompanhei a implantação com os usuários, contribuindo para triplicar os clientes atendidos por mês.',
-                'Desenvolvi sozinho, de ponta a ponta, um chatbot de WhatsApp com API em C#, reaproveitando a integração e o pacote de mensagens já contratados. Com fluxos modelados em grafo e processamento assíncrono, qualificou leads por um ano, com cerca de 1.000 mensagens por dia.',
-                'Automatizei a emissão e a coleta de NFS-e em sistemas municipais sem API pública, com engenharia reversa e mecanismos genéricos e adaptáveis, incluindo o Emissor Nacional.',
-                'Propus o novo design da página principal da área do cliente e implementei o novo painel, com recursos para o controle de tarefas.',
+            highlights: [
+                {title: 'Portal do cliente e app interno', text: 'Levantei os requisitos com a diretoria, desenhei a solução com a equipe sênior e acompanhei a implantação com os usuários. Os clientes atendidos por mês triplicaram.'},
+                {title: 'Chatbot de WhatsApp em C#', text: 'Feito sozinho, de ponta a ponta. Qualificou leads por um ano, com cerca de 1.000 mensagens por dia, reaproveitando a integração já contratada em vez de pagar mensageria extra.'},
+                {title: 'NFS-e sem API pública', text: 'Automatizei a emissão e a coleta de notas fiscais em vários sistemas municipais por engenharia reversa, incluindo o Emissor Nacional, eliminando erros manuais.'},
+                {title: 'WordPress e infraestrutura Linux', text: 'Cuido do site da empresa de ponta a ponta: cerca de 10 páginas criadas, servidor, segurança e atualizações, com ambiente de testes antes de ir ao ar.'},
             ],
-            infraTitle: 'Manutenção e infraestrutura',
-            infra: [
-                'Responsável pelo ecossistema WordPress da empresa: cerca de 10 páginas criadas no Elementor, infraestrutura Linux, segurança e atualizações, com ambiente separado para testar antes de ir ao ar.',
-                'Correções e otimizações nos sistemas internos, melhorando a estabilidade das aplicações.',
-            ],
+            resume: 'Baixar currículo (PDF)',
             educationTitle: 'Formação',
             education: [
                 {name: 'Psicologia', school: 'Universidade São Francisco (USF)', period: 'em andamento · conclusão prevista em 2030', note: 'Iniciação científica (2026): medidas de personalidade com processamento de linguagem natural'},
@@ -140,11 +142,18 @@ export const translations = {
             locationText: 'In the Campinas area. Open to on-site, hybrid or remote opportunities.',
             globeLabel: "I'm here!",
             contactBtn: 'Get in touch',
-            peopleTitle: 'Code built for people',
-            peopleText: 'Besides development, I study Psychology at USF. I study how people use, learn and work, and bring that into the products I build: gathering requirements with the people who will use them, following the rollout and adjusting based on real usage.',
             contactLabel: 'My email',
             whatsapp: 'WhatsApp',
             copied: 'Copied!',
+        },
+        motivation: {
+            title: 'What drives me',
+            lead: 'I have always been drawn to the complexity of people: how they think, decide, learn and work.',
+            pillars: [
+                {title: 'People', text: 'So, besides building software, I study Psychology. My undergraduate research brings both fields together: I use natural language processing to measure personality from what people write.'},
+                {title: 'End to end', text: 'My strength is seeing the whole path, from the first conversation with the people who will use it to the system running in production: I gather requirements, design the solution, build it, ship it and follow its use.'},
+                {title: 'User and client', text: 'I want what the user needs and what the client receives to be the same thing: software that solves the right problem, because it was built by understanding who is on the other side.'},
+            ],
         },
         projects: {
             title: 'Projects',
@@ -182,18 +191,13 @@ export const translations = {
             role: 'Full-Stack Developer',
             place: 'Campinas, Brazil',
             period: 'Feb 2024 — present',
-            devTitle: 'Development',
-            dev: [
-                'Gathered requirements for the corporate department with the board and designed the new solution (client portal and internal app), built together with the senior team. Followed the rollout with users, helping triple the number of clients served per month.',
-                'Built a WhatsApp chatbot end to end on my own, with a C# API, reusing the integration and the message plan the company already paid for. Using graph-modeled flows and async processing, it qualified leads for a year, at around 1,000 messages a day.',
-                'Automated the issuing and collection of service invoices (NFS-e) across municipal systems with no public API, using reverse engineering and generic, adaptable mechanisms, including the national issuer.',
-                'Proposed the new design for the client area home page and implemented the new dashboard, with task-tracking features.',
+            highlights: [
+                {title: 'Client portal and internal app', text: 'Gathered requirements with the board, designed the solution with the senior team and followed the rollout with users. Clients served per month tripled.'},
+                {title: 'WhatsApp chatbot in C#', text: 'Built solo, end to end. It qualified leads for a year at around 1,000 messages a day, reusing an integration the company already paid for instead of buying extra messaging.'},
+                {title: 'Service invoices with no public API', text: 'Automated issuing and collecting service invoices (NFS-e) across many municipal systems through reverse engineering, including the national issuer, eliminating manual errors.'},
+                {title: 'WordPress and Linux infrastructure', text: "I run the company website end to end: around 10 pages built, server, security and updates, with a staging environment before anything goes live."},
             ],
-            infraTitle: 'Maintenance and infrastructure',
-            infra: [
-                "Responsible for the company's WordPress ecosystem: around 10 pages built in Elementor, Linux infrastructure, security and updates, with a separate environment to test before going live.",
-                'Fixes and optimizations in internal systems, improving application stability.',
-            ],
+            resume: 'Download résumé (PDF, in Portuguese)',
             educationTitle: 'Education',
             education: [
                 {name: 'Psychology', school: 'Universidade São Francisco (USF)', period: 'in progress · expected 2030', note: 'Undergraduate research (2026): measuring personality with natural language processing'},

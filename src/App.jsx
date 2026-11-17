@@ -6,6 +6,7 @@ import Contact from "./sections/Contact.jsx";
 import Footer from "./sections/Footer.jsx";
 import Experience from "./sections/Experience.jsx";
 import Projects from "./sections/Projects.jsx";
+import Motivation from "./sections/Motivation.jsx";
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
             <Navbar/>
             <Hero/>
             <About/>
+            <Motivation/>
             <Projects/>
             <Experience/>
             <Contact/>

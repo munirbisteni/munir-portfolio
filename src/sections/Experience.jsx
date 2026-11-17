@@ -1,14 +1,6 @@
 import React from 'react'
 import {useLanguage} from "../i18n/LanguageContext.jsx";
 
-const Bullets = ({items}) => (
-    <ul className="flex flex-col gap-3 list-disc pl-5 marker:text-white-500">
-        {items.map((item) => (
-            <li key={item} className="text-white-600 group-hover:text-white-700 transition-colors">{item}</li>
-        ))}
-    </ul>
-);
-
 const Experience = () => {
     const {t} = useLanguage();
     const w = t.work;
@@ -26,14 +18,19 @@ const Experience = () => {
                             <p className="text-white-700">{w.role}</p>
                             <p className="text-sm text-white-500 mt-1">{w.place} · {w.period}</p>
                         </header>
-                        <div className="flex flex-col gap-3">
-                            <p className="font-semibold text-white-800">{w.devTitle}</p>
-                            <Bullets items={w.dev}/>
-                        </div>
-                        <div className="flex flex-col gap-3">
-                            <p className="font-semibold text-white-800">{w.infraTitle}</p>
-                            <Bullets items={w.infra}/>
-                        </div>
+                        <ul className="grid sm:grid-cols-2 gap-4">
+                            {w.highlights.map(({title, text}) => (
+                                <li key={title} className="rounded-lg bg-black-300/50 border border-black-300 p-4">
+                                    <p className="font-semibold text-white-800">{title}</p>
+                                    <p className="text-sm mt-2">{text}</p>
+                                </li>
+                            ))}
+                        </ul>
+                        <a href="/curriculo-munir-bisteni.pdf" target="_blank" rel="noreferrer"
+                           className="w-fit flex items-center gap-2 rounded-md bg-black-300 px-4 py-2 text-white hover:bg-black-500 transition-colors">
+                            {w.resume}
+                            <img src="/assets/arrow-up.png" alt="" className="w-3 h-3"/>
+                        </a>
                     </article>
 
                     {/* Formação e idiomas */}
