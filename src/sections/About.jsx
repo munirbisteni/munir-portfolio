@@ -1,5 +1,5 @@
-import React, {useCallback, useRef, useState} from 'react'
-import Globe from "react-globe.gl";
+import React, {useState} from 'react'
+import LazyGlobe from "../components/LazyGlobe.jsx";
 import Button from "../components/Button.jsx";
 import {contactInfo, techStack} from "../constants/index.js";
 import {useLanguage} from "../i18n/LanguageContext.jsx";
@@ -10,21 +10,6 @@ const EMAIL = contactInfo.email;
 const About = () => {
     const {t} = useLanguage();
     const [hasCopied, setHasCopied] = useState(false);
-    const globeRef = useRef();
-
-    // Globo decorativo: gira sozinho e não responde a toque/mouse (no celular atrapalhava a rolagem).
-    const handleGlobeReady = useCallback(() => {
-        const globe = globeRef.current;
-        if (!globe) return;
-        globe.pointOfView({lat: -22.97, lng: -46.99, altitude: 2.2}, 0);
-        const controls = globe.controls();
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.6;
-        controls.enableZoom = false;
-        controls.enableRotate = false;
-        controls.enablePan = false;
-    }, []);
-
     const handleCopy = () => {
         navigator.clipboard.writeText(EMAIL);
         setHasCopied(true);
@@ -37,7 +22,10 @@ const About = () => {
 
                 {/* Apresentação */}
                 <div className="grid-container">
-                    <img src="/assets/grid1.png" alt="" className="w-full h-[200px] sm:h-[240px] object-contain"/>
+                    <div className="w-full h-[200px] sm:h-[240px] flex items-center justify-center">
+                        <img src="/assets/avatar.webp" alt={t.about.avatarAlt} width="200" height="200"
+                             className="w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] rounded-3xl border border-black-300 object-cover shadow-2xl shadow-black"/>
+                    </div>
                     <div>
                         <p className="grid-headtext">{t.about.introTitle}</p>
                         <p className="grid-subtext">{t.about.introText}</p>
@@ -71,27 +59,8 @@ const About = () => {
                 {/* Localização e contato */}
                 <div className="md:col-span-2 xl:col-span-1">
                     <div className="grid-container md:flex-row xl:flex-col md:items-center xl:items-stretch">
-                        <div className="flex justify-center items-center shrink-0 pointer-events-none select-none" aria-hidden="true">
-                            <Globe
-                                ref={globeRef}
-                                onGlobeReady={handleGlobeReady}
-                                enablePointerInteraction={false}
-                                height={260}
-                                width={260}
-                                backgroundColor="rgba(0,0,0,0)"
-                                backgroundImageOpacity={0.5}
-                                showAtmosphere
-                                showGraticules
-                                globeImageUrl="https://unpkg.com/three-globe@2.41.12/example/img/earth-night.jpg"
-                                bumpImageUrl="https://unpkg.com/three-globe@2.41.12/example/img/earth-topology.png"
-                                labelsData={[{
-                                    lat: -22.971201,
-                                    lng: -46.996410,
-                                    text: t.about.globeLabel,
-                                    color: "white",
-                                    size: 20,
-                                }]}
-                            />
+                        <div className="flex justify-center shrink-0">
+                            <LazyGlobe size={260} label={t.about.globeLabel}/>
                         </div>
                         <div className="flex flex-col gap-6 w-full">
                             <div>

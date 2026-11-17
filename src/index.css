@@ -23,11 +23,11 @@ body {
   }
 
   .nav-ul {
-    @apply flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20;
+    @apply flex flex-col items-center gap-4 lg:flex-row lg:gap-6 relative z-20;
   }
 
   .nav-li {
-    @apply text-neutral-400 hover:text-white font-generalsans max-sm:hover:bg-black-500 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5;
+    @apply text-neutral-400 hover:text-white font-generalsans max-lg:hover:bg-black-500 max-lg:w-full max-lg:rounded-md py-2 max-lg:px-5;
   }
 
   .nav-li_a {
@@ -35,7 +35,7 @@ body {
   }
 
   .nav-sidebar {
-    @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block;
+    @apply absolute left-0 right-0 bg-black-200 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden z-20 mx-auto lg:hidden block;
   }
 
   .text-gray_gradient {
@@ -151,6 +151,21 @@ body {
   .social-icon {
     @apply w-12 h-12 rounded-full flex justify-center items-center bg-black-300 border border-black-200;
   }
+}
+
+/* Quem ativou "reduzir movimento" no sistema não vê animações contínuas */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Link da seção visível no menu */
+.nav-li_a.is-active {
+  @apply text-white;
 }
 
 .waving-hand {

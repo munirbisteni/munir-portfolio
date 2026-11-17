@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {capimScreens, capimTags, otherProjects} from "../constants/index.js";
 import {useLanguage} from "../i18n/LanguageContext.jsx";
+import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion.js";
 
 const Tag = ({children}) => (
     <li className="text-xs text-white-700 bg-black-300 rounded-md px-2.5 py-1">{children}</li>
@@ -11,21 +12,33 @@ const CapimPreview = () => {
     const {t} = useLanguage();
     const [index, setIndex] = useState(0);
     const [paused, setPaused] = useState(false);
+    const reducedMotion = usePrefersReducedMotion();
+    const touchStart = useRef(null);
     const total = capimScreens.length;
 
     useEffect(() => {
-        if (paused) return;
+        if (paused || reducedMotion) return;
         const id = setInterval(() => setIndex((i) => (i + 1) % total), 3500);
         return () => clearInterval(id);
-    }, [paused, total]);
+    }, [paused, reducedMotion, total]);
 
     const go = (step) => setIndex((i) => (i + step + total) % total);
+
+    // Deslizar o dedo para os lados troca de tela; tocar pausa a troca automática.
+    const onTouchStart = (e) => { touchStart.current = e.touches[0].clientX; setPaused(true); };
+    const onTouchEnd = (e) => {
+        if (touchStart.current === null) return;
+        const dx = e.changedTouches[0].clientX - touchStart.current;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+        touchStart.current = null;
+    };
 
     return (
         <div className="flex flex-col items-center gap-4"
              onMouseEnter={() => setPaused(true)}
              onMouseLeave={() => setPaused(false)}>
-            <div className="relative w-[250px] sm:w-[280px] aspect-[390/844] rounded-[44px] border-[6px] border-black-500 bg-black overflow-hidden shadow-[0_0_80px_0_rgba(212,242,58,0.18)]">
+            <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
+                 className="touch-pan-y relative w-[250px] sm:w-[280px] aspect-[390/844] rounded-[44px] border-[6px] border-black-500 bg-black overflow-hidden shadow-[0_0_80px_0_rgba(212,242,58,0.18)]">
                 {capimScreens.map((src, i) => (
                     <img key={src}
                          src={src}

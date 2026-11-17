@@ -8,7 +8,8 @@ export const contactInfo = {
 export const navLinks = [
     {id: 1, key: 'home', href: '#home'},
     {id: 2, key: 'about', href: '#about'},
-    {id: 3, key: 'projects', href: '#projects'},
+    {id: 3, key: 'motivation', href: '#motivation'},
+    {id: 6, key: 'projects', href: '#projects'},
     {id: 4, key: 'work', href: '#work'},
     {id: 5, key: 'contact', href: '#contact'},
 ];

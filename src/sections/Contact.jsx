@@ -8,15 +8,18 @@ const Contact = () => {
     const formRef = useRef();
 
     const [loading, setLoading] = useState(false)
+    const [status, setStatus] = useState(null); // null | 'success' | 'error'
     const [form, setForm] = useState({ name: '', email: '', message: ''});
 
     const handleChange = ({target: {name, value}}) => {
         setForm({...form, [name]: value});
+        if (status) setStatus(null);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setStatus(null);
         try{
             await emailjs.send('service_kkhsc3a', 'template_o4od45c',
                 {
@@ -31,12 +34,12 @@ const Contact = () => {
 
             setLoading(false);
             setForm({name: '', email: '', message: ''});
-            alert(t.contact.success);
+            setStatus('success');
 
         } catch(error){
             setLoading(false);
-            console.log(error);
-            alert(t.contact.error);
+            console.error(error);
+            setStatus('error');
         }
     }
     return (
@@ -94,10 +97,15 @@ const Contact = () => {
                                 placeholder={t.contact.messagePh}
                             />
                         </label>
-                        <button className="field-btn hover:bg-white-500 transition-colors" type="submit" disabled={loading}>
-                            {loading ? t.contact.sending : t.contact.send}
-                            <img  src="/assets/arrow-up.png" alt="" className="field-btn_arrow"/>
+                        <button className="field-btn hover:bg-white-500 transition-colors disabled:opacity-60 disabled:cursor-wait" type="submit" disabled={loading}>
+                            {loading ? t.contact.sending : status === 'success' ? `${t.contact.sent} ✓` : t.contact.send}
+                            {!loading && status !== 'success' && <img src="/assets/arrow-up.png" alt="" className="field-btn_arrow"/>}
                         </button>
+                        <p role="status" aria-live="polite"
+                           className={`text-sm min-h-5 ${status === 'error' ? 'text-red-300' : 'text-green-300'}`}>
+                            {status === 'success' && t.contact.success}
+                            {status === 'error' && t.contact.error}
+                        </p>
                     </form>
                 </div>
             </div>

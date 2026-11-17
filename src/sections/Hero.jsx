@@ -10,9 +10,11 @@ import HeroObjects from "../components/HeroObjects.jsx";
 import Button from "../components/Button.jsx";
 import SceneErrorBoundary from "../components/SceneErrorBoundary.jsx";
 import {useLanguage} from "../i18n/LanguageContext.jsx";
+import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion.js";
 
 const Hero = () => {
     const {t} = useLanguage();
+    const reducedMotion = usePrefersReducedMotion();
 
     const isSmall = useMediaQuery({maxWidth: 440})
     const isMobile = useMediaQuery({maxWidth: 768});
@@ -35,7 +37,7 @@ const Hero = () => {
 
                 <div className="w-full h-full absolute inset-0">
                     <SceneErrorBoundary>
-                    <Canvas className="w-full h-full">
+                    <Canvas className="w-full h-full" frameloop={reducedMotion ? 'demand' : 'always'}>
                         <Suspense fallback={<CanvasLoader />}>
                             <PerspectiveCamera makeDefault position={[0, 0, 20]}/>
                             <HeroCamera isMobile = {isMobile}>
