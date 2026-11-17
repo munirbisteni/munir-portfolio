@@ -31,7 +31,6 @@ const content = {
         label: 'Iniciação científica · PLN e personalidade',
         question: '“Como você descreveria, em detalhes, sua personalidade?”',
         answer: 'Sou [curioso|O] e gosto de [ideias novas|O], principalmente sobre [pessoas|A]: como pensam, decidem e trabalham. Antes de construir, prefiro [ouvir|A] quem vai usar. Sou [organizado|C] e levo as coisas [até o fim|C]. Gosto de [conversar|E] e não hesito em [assumir a frente|E] quando precisa. E confesso: me [preocupo|N] com cada [detalhe|C].',
-        done: 'Cada palavra marcada soma na barra do seu traço.',
         replay: 'Ver de novo',
         note: 'Ilustração inspirada na minha iniciação científica, que mede personalidade a partir de textos livres. Não há escores reais aqui.',
         avatarAlt: 'Avatar de Munir Bisteni',
@@ -48,7 +47,6 @@ const content = {
         label: 'Undergraduate research · NLP and personality',
         question: '“How would you describe your personality in detail?”',
         answer: "I'm [curious|O] and drawn to [new ideas|O], especially about [people|A]: how they think, decide and work. Before building, I'd rather [listen|A] to who will use it. I'm [organized|C] and I see things [through to the end|C]. I like to [talk things through|E] and I don't hesitate to [take the lead|E] when needed. And I'll admit it: I [worry|N] about every [detail|C].",
-        done: 'Each highlighted word adds to the bar of its trait.',
         replay: 'Play again',
         note: 'Illustration inspired by my undergraduate research, which measures personality from free-form text. No real scores here.',
         avatarAlt: 'Avatar of Munir Bisteni',
@@ -78,6 +76,7 @@ const parseAnswer = (answer) => {
 const charDelay = (ch) => (/[.:]/.test(ch) ? 200 : ch === ',' ? 100 : 10 + Math.random() * 14);
 
 const EMPTY_FILLS = {O: 0, C: 0, E: 0, A: 0, N: 0};
+const RING_PAUSE = 800; // a frase some primeiro; só depois as palavras vão para a roda
 const AVATAR_SMALL = 48;
 
 // Afasta as palavras umas das outras e do avatar, sem sair da área permitida.
@@ -153,6 +152,7 @@ const HeroPortrait = () => {
     const headRef = useRef(null);  // rótulo + pergunta
     const wordRefs = useRef({});
     const flyerRefs = useRef({});
+    const videoRef = useRef(null); // avatar animado (fala, pensa com a mão no queixo e sorri no fim)
     const animsRef = useRef([]);
     const fillRefs = useRef({});   // preenchimento de cada barra (para a gota parar no topo real)
     const waveRefs = useRef({});   // brilho da onda neon dentro de cada barra
@@ -173,6 +173,24 @@ const HeroPortrait = () => {
 
     useEffect(() => { restart(); }, [lang, restart]);
     useEffect(() => () => stopAnims(), []);
+
+    // Vídeo do avatar: começa quando ele aparece no centro da roda e termina parado no sorriso
+    useEffect(() => {
+        const v = videoRef.current;
+        if (!v) return;
+        if (phase === 'typing') {
+            v.pause();
+            try { v.currentTime = 0; } catch { /* vídeo ainda carregando */ }
+            return;
+        }
+        if (phase === 'ring' && !reducedMotion) {
+            const id = setTimeout(() => {
+                try { v.currentTime = 0; } catch { /* vídeo ainda carregando */ }
+                v.play().catch(() => {});
+            }, RING_PAUSE);
+            return () => clearTimeout(id);
+        }
+    }, [phase, reducedMotion]);
 
     // Começa a digitar quando o cartão aparece
     useEffect(() => {
@@ -226,7 +244,8 @@ const HeroPortrait = () => {
             return {
                 key: seg.start, text: seg.text, trait: seg.trait, order: i,
                 w, h,
-                from: {x: r.left - box.left, y: r.top - box.top},
+                // numa linha só, a palavra pode passar da borda; puxa para dentro do cartão
+                from: {x: Math.min(r.left - box.left, W - w - 8), y: r.top - box.top},
                 x: cx + Math.cos(angle) * rx, y: cy + Math.sin(angle) * ry,
             };
         });
@@ -279,7 +298,7 @@ const HeroPortrait = () => {
                 setGeo(ring);
                 setPhase('ring');
             }
-        }, reducedMotion ? 0 : 900);
+        }, reducedMotion ? 0 : 1100);
         return () => clearTimeout(id);
     }, [phase, typed, total, started, buildRing, buildBars, reducedMotion]);
 
@@ -292,7 +311,7 @@ const HeroPortrait = () => {
             return el.animate([
                 {transform: `translate(${w.from.x}px, ${w.from.y}px)`},
                 {transform: `translate(${w.ring.x}px, ${w.ring.y}px)`},
-            ], {duration: 1000, delay: w.order * 70, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards'});
+            ], {duration: 1000, delay: RING_PAUSE + w.order * 70, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards'});
         }).filter(Boolean);
         animsRef.current.push(...anims);
         let timer;
@@ -577,11 +596,13 @@ const HeroPortrait = () => {
                         {/* Avatar (a moldura quadrada da imagem fica fora do círculo graças ao zoom) */}
                         <div aria-hidden="true"
                              className="absolute transition-all duration-700 ease-[cubic-bezier(.2,.8,.2,1)]"
-                             style={avatarStyle}>
+                             style={{...avatarStyle, transitionDelay: ring ? `${RING_PAUSE}ms` : '0ms'}}>
                             <div className="absolute -inset-3 rounded-full blur-xl transition-opacity duration-700"
-                                 style={{opacity: ring ? 0.45 : 0, background: 'conic-gradient(from 0deg, #a78bfa, #60a5fa, #fbbf24, #34d399, #fb7185, #a78bfa)'}}/>
-                            <div className="relative w-full h-full rounded-full overflow-hidden bg-[#0b0b0b] ring-1 ring-white/10">
-                                <img src="/assets/avatar.webp" alt={c.avatarAlt} className="w-full h-full object-cover scale-[1.24] translate-y-[3%]"/>
+                                 style={{transitionDelay: ring ? `${RING_PAUSE}ms` : '0ms', opacity: ring ? 0.45 : 0, background: 'conic-gradient(from 0deg, #a78bfa, #60a5fa, #fbbf24, #34d399, #fb7185, #a78bfa)'}}/>
+                            <div className="relative w-full h-full rounded-full overflow-hidden bg-black ring-1 ring-white/10">
+                                <video ref={videoRef} src="/assets/avatar-video.mp4" poster="/assets/avatar-video-poster.webp"
+                                       aria-label={c.avatarAlt} muted playsInline preload="auto"
+                                       className="w-full h-full object-cover scale-[.94] translate-y-[5%]"/>
                             </div>
                         </div>
 
@@ -604,7 +625,7 @@ const HeroPortrait = () => {
                         ))}
                     </div>
                     <figcaption className="flex items-start justify-between gap-4 text-xs text-white-500">
-                        <span>{settled ? `${c.done} ` : ''}{c.note}</span>
+                        <span>{c.note}</span>
                         <button type="button" onClick={restart}
                                 className="shrink-0 rounded-full border border-black-300 bg-black-200 px-3 py-1 text-white-700 hover:text-white transition-all"
                                 style={{opacity: settled ? 1 : 0, pointerEvents: settled ? 'auto' : 'none'}}>

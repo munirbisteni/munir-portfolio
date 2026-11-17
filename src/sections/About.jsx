@@ -23,8 +23,9 @@ const About = () => {
                 {/* Apresentação */}
                 <div className="grid-container">
                     <div className="w-full h-[200px] sm:h-[240px] flex items-center justify-center">
-                        <img src="/assets/avatar.webp" alt={t.about.avatarAlt} width="220" height="220"
-                             className="w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] object-contain drop-shadow-2xl"/>
+                        {/* fundo preto da imagem some sobre o cartão escuro (mix-blend lighten) */}
+                        <img src="/assets/avatar-sobre.webp" alt={t.about.avatarAlt} width="220" height="220"
+                             className="w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] object-contain mix-blend-lighten"/>
                     </div>
                     <div>
                         <p className="grid-headtext">{t.about.introTitle}</p>
