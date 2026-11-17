@@ -1,9 +1,11 @@
 import React from 'react'
 import {useLanguage} from "../i18n/LanguageContext.jsx";
+import {contactInfo} from "../constants/index.js";
 
 const Experience = () => {
     const {t} = useLanguage();
     const w = t.work;
+    const resumeMailto = `mailto:${contactInfo.email}?subject=${encodeURIComponent(w.resumeMailSubject)}&body=${encodeURIComponent(w.resumeMailBody)}`;
 
     return (
         <section className="c-space my-20" id="work">
@@ -26,11 +28,21 @@ const Experience = () => {
                                 </li>
                             ))}
                         </ul>
-                        <a href="/curriculo-munir-bisteni.pdf" target="_blank" rel="noreferrer"
-                           className="w-fit flex items-center gap-2 rounded-md bg-black-300 px-4 py-2 text-white hover:bg-black-500 transition-colors">
-                            {w.resume}
-                            <img src="/assets/arrow-up.png" alt="" className="w-3 h-3"/>
-                        </a>
+                        <div className="flex flex-col gap-2">
+                            <a href="/curriculo-munir-bisteni.pdf" target="_blank" rel="noreferrer"
+                               className="w-fit flex items-center gap-2 rounded-md bg-black-300 px-4 py-2 text-white hover:bg-black-500 transition-colors">
+                                <span aria-hidden="true">🔒</span>
+                                {w.resume}
+                                <img src="/assets/arrow-up.png" alt="" className="w-3 h-3"/>
+                            </a>
+                            <p className="text-sm text-white-500">
+                                {w.resumeLocked}{' '}
+                                <a href={resumeMailto} className="text-white underline underline-offset-2 hover:text-white-800">
+                                    {w.resumeAsk}
+                                </a>
+                                {' '}({contactInfo.email}).
+                            </p>
+                        </div>
                     </article>
 
                     {/* Formação e idiomas */}

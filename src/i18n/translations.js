@@ -24,7 +24,7 @@ export const translations = {
         },
         about: {
             introTitle: 'Desenvolvedor Full-Stack',
-            introText: 'Gosto de pegar um problema do começo ao fim: entender quem vai usar, desenhar a solução, construir e colocar no ar. Já atuei com engenharia reversa de sistemas públicos, integrações com WhatsApp e infraestrutura Linux.',
+            introText: 'Gosto de pegar um problema do começo ao fim: entender quem vai usar, desenhar a solução, construir e colocar no ar. Já atuei com automação de sistemas sem API pública, integrações com WhatsApp e infraestrutura Linux.',
             stackTitle: 'Com o que trabalho',
             stackText: 'Foco em aprender o que cada problema exige. No dia a dia:',
             locationTitle: 'Valinhos, SP — Brasil',
@@ -83,11 +83,15 @@ export const translations = {
             period: 'fev 2024 — presente',
             highlights: [
                 {title: 'Portal do cliente e app interno', text: 'Levantei os requisitos com a diretoria, desenhei a solução com a equipe sênior e acompanhei a implantação com os usuários. Os clientes atendidos por mês triplicaram.'},
-                {title: 'Chatbot de WhatsApp em C#', text: 'Feito sozinho, de ponta a ponta. Qualificou leads por um ano, com cerca de 1.000 mensagens por dia, reaproveitando a integração já contratada em vez de pagar mensageria extra.'},
-                {title: 'NFS-e sem API pública', text: 'Automatizei a emissão e a coleta de notas fiscais em vários sistemas municipais por engenharia reversa, incluindo o Emissor Nacional, eliminando erros manuais.'},
+                {title: 'Chatbot de WhatsApp em C#', text: 'Feito sozinho, de ponta a ponta. Qualificou leads por um ano, com alto volume diário de mensagens, reaproveitando a integração já contratada em vez de pagar mensageria extra.'},
+                {title: 'NFS-e sem API pública', text: 'Automatizei a emissão e a coleta de notas fiscais em vários sistemas municipais, incluindo o Emissor Nacional, eliminando erros manuais.'},
                 {title: 'WordPress e infraestrutura Linux', text: 'Sou responsável pelo WordPress da empresa de ponta a ponta: servidor Linux, publicação, atualizações, segurança e criação de páginas, com novas funcionalidades testadas em ambiente separado antes de ir ao ar.'},
             ],
             resume: 'Baixar currículo (PDF)',
+            resumeLocked: 'O PDF é protegido por senha.',
+            resumeAsk: 'Peça a senha por e-mail',
+            resumeMailSubject: 'Senha do currículo',
+            resumeMailBody: 'Oi, Munir! Vi seu portfólio e gostaria da senha do currículo.',
             educationTitle: 'Formação',
             education: [
                 {name: 'Psicologia', school: 'Universidade São Francisco (USF)', period: 'em andamento · conclusão prevista em 2030', note: 'Iniciação científica (2026): medidas de personalidade com processamento de linguagem natural'},
@@ -141,7 +145,7 @@ export const translations = {
         },
         about: {
             introTitle: 'Full-Stack Developer',
-            introText: 'I like owning a problem end to end: understanding who will use it, designing the solution, building it and shipping it. I have worked on reverse engineering of public systems, WhatsApp integrations and Linux infrastructure.',
+            introText: 'I like owning a problem end to end: understanding who will use it, designing the solution, building it and shipping it. I have worked on automating systems with no public API, WhatsApp integrations and Linux infrastructure.',
             stackTitle: 'What I work with',
             stackText: 'I focus on learning whatever each problem requires. Day to day:',
             locationTitle: 'Valinhos, SP — Brazil',
@@ -200,11 +204,15 @@ export const translations = {
             period: 'Feb 2024 — present',
             highlights: [
                 {title: 'Client portal and internal app', text: 'Gathered requirements with the board, designed the solution with the senior team and followed the rollout with users. Clients served per month tripled.'},
-                {title: 'WhatsApp chatbot in C#', text: 'Built solo, end to end. It qualified leads for a year at around 1,000 messages a day, reusing an integration the company already paid for instead of buying extra messaging.'},
-                {title: 'Service invoices with no public API', text: 'Automated issuing and collecting service invoices (NFS-e) across many municipal systems through reverse engineering, including the national issuer, eliminating manual errors.'},
+                {title: 'WhatsApp chatbot in C#', text: 'Built solo, end to end. It qualified leads for a year at a high daily message volume, reusing an integration the company already paid for instead of buying extra messaging.'},
+                {title: 'Service invoices with no public API', text: 'Automated issuing and collecting service invoices (NFS-e) across many municipal systems, including the national issuer, eliminating manual errors.'},
                 {title: 'WordPress and Linux infrastructure', text: "I am responsible for the company's WordPress end to end: Linux server, deployment, updates, security and page building, with new features tested in a separate environment before going live."},
             ],
             resume: 'Download résumé (PDF, in Portuguese)',
+            resumeLocked: 'The PDF is password-protected.',
+            resumeAsk: 'Request the password by email',
+            resumeMailSubject: 'Résumé password',
+            resumeMailBody: 'Hi Munir! I saw your portfolio and would like the password for your résumé.',
             educationTitle: 'Education',
             education: [
                 {name: 'Psychology', school: 'Universidade São Francisco (USF)', period: 'in progress · expected 2030', note: 'Undergraduate research (2026): measuring personality with natural language processing'},
