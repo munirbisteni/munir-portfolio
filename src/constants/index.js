@@ -39,7 +39,8 @@ export const otherProjects = [
         title: 'Missões e Cidade',
         image: '/projects/missoes.jpg',
         href: 'https://missoes-e-cidade-ibaviva.vercel.app',
-        tags: ['React', 'Next.js', 'Vercel'],
+        code: 'https://github.com/munirbisteni/missoes-e-cidade-ibaviva',
+        tags: ['React', 'Vite', 'Tailwind', 'Vercel'],
     },
     {
         key: 'ic',
