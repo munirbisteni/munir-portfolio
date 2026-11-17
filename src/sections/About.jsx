@@ -23,9 +23,19 @@ const About = () => {
                 {/* Apresentação */}
                 <div className="grid-container">
                     <div className="w-full h-[200px] sm:h-[240px] flex items-center justify-center">
-                        {/* fundo preto da imagem some sobre o cartão escuro (mix-blend lighten) */}
-                        <img src="/assets/avatar-sobre.webp" alt={t.about.avatarAlt} width="220" height="220"
-                             className="w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] object-contain mix-blend-lighten"/>
+                        {/* Moldura de vidro: borda brilhante (mais clara no alto à esquerda), reflexo e sombra */}
+                        <div className="relative w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] rounded-[30px] p-[7px] shadow-[0_24px_50px_-12px_rgba(0,0,0,.85),inset_0_1px_1px_rgba(255,255,255,.7),inset_0_-1px_1px_rgba(255,255,255,.25)]"
+                             style={{background: 'linear-gradient(150deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.22) 26%, rgba(255,255,255,.08) 55%, rgba(255,255,255,.18) 80%, rgba(255,255,255,.42) 100%)'}}>
+                            <div className="relative w-full h-full rounded-[24px] overflow-hidden bg-black">
+                                <img src="/assets/avatar-sobre.webp" alt={t.about.avatarAlt} width="220" height="220"
+                                     className="w-full h-full object-cover scale-[1.3] translate-y-[5%]"/>
+                                <div aria-hidden="true" className="absolute inset-0 rounded-[24px] pointer-events-none"
+                                     style={{
+                                         background: 'linear-gradient(160deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 28%, transparent 46%)',
+                                         boxShadow: 'inset 0 1px 0 rgba(255,255,255,.4), inset 0 0 0 1px rgba(255,255,255,.08), inset 0 10px 24px rgba(0,0,0,.55)',
+                                     }}/>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <p className="grid-headtext">{t.about.introTitle}</p>
