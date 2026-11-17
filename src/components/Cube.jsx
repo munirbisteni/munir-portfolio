@@ -44,6 +44,6 @@ const Cube = ({ ...props }) => {
     );
 };
 
-useGLTF.preload('//models/cube.glb');
+useGLTF.preload('/models/cube.glb');
 
 export default Cube;

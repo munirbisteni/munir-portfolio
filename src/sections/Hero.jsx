@@ -11,6 +11,7 @@ import Cube from "../components/Cube.jsx";
 import Rings from "../components/Rings.jsx";
 import HeroCamera from "../components/HeroCamera.jsx";
 import Button from "../components/Button.jsx";
+import SceneErrorBoundary from "../components/SceneErrorBoundary.jsx";
 
 const Hero = () => {
 
@@ -31,6 +32,7 @@ const Hero = () => {
 
 
                 <div className="w-full h-full absolute inset-0">
+                    <SceneErrorBoundary>
                     <Canvas className="w-full h-full">
                         <Suspense fallback={<CanvasLoader />}>
                             <PerspectiveCamera makeDefault position={[0, 0, 20]}/>
@@ -45,15 +47,16 @@ const Hero = () => {
                                 />
                             </HeroCamera>
                             <group>
-                                <ReactLogo position = {sizes.reactLogoPosition} />
-                                <Target position = {sizes.targetPosition} />
-                                <Cube position = {sizes.cubePosition} />
-                                <Rings position = {sizes.ringPosition} />
+                                <SceneErrorBoundary><ReactLogo position = {sizes.reactLogoPosition} /></SceneErrorBoundary>
+                                <SceneErrorBoundary><Target position = {sizes.targetPosition} /></SceneErrorBoundary>
+                                <SceneErrorBoundary><Cube position = {sizes.cubePosition} /></SceneErrorBoundary>
+                                <SceneErrorBoundary><Rings position = {sizes.ringPosition} /></SceneErrorBoundary>
                             </group>
                             <ambientLight intensity= {1}/>
                             <directionalLight position = {[10, 10, 10]} intensity ={0.5}/>
                         </Suspense>
                     </Canvas>
+                    </SceneErrorBoundary>
                 </div>
                 <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
                     <a href="#contact" className="w-fit">
