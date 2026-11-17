@@ -87,7 +87,6 @@ export const translations = {
             education: [
                 {name: 'Psicologia', school: 'Universidade São Francisco (USF)', period: 'em andamento · conclusão prevista em 2030', note: 'Iniciação científica (2026): medidas de personalidade com processamento de linguagem natural'},
                 {name: 'Técnico em Desenvolvimento de Software', school: 'Colégio Técnico de Campinas (Cotuca) – Unicamp', period: '2023–2024'},
-                {name: 'Engenharia de Software', school: 'PUC-Campinas', period: '2023–2024 · incompleto'},
             ],
             languagesTitle: 'Idiomas',
             languages: 'Português nativo · Inglês: leitura e compreensão oral fluentes; conversação e escrita intermediárias',
@@ -199,7 +198,6 @@ export const translations = {
             education: [
                 {name: 'Psychology', school: 'Universidade São Francisco (USF)', period: 'in progress · expected 2030', note: 'Undergraduate research (2026): measuring personality with natural language processing'},
                 {name: 'Software Development Technician', school: 'Colégio Técnico de Campinas (Cotuca) – Unicamp', period: '2023–2024'},
-                {name: 'Software Engineering', school: 'PUC-Campinas', period: '2023–2024 · not completed'},
             ],
             languagesTitle: 'Languages',
             languages: 'Portuguese (native) · English: fluent reading and listening; intermediate speaking and writing',
