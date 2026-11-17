@@ -27,8 +27,8 @@ const About = () => {
                         <div className="relative w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] rounded-[30px] p-[7px] shadow-[0_24px_50px_-12px_rgba(0,0,0,.85),inset_0_1px_1px_rgba(255,255,255,.7),inset_0_-1px_1px_rgba(255,255,255,.25)]"
                              style={{background: 'linear-gradient(150deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.22) 26%, rgba(255,255,255,.08) 55%, rgba(255,255,255,.18) 80%, rgba(255,255,255,.42) 100%)'}}>
                             <div className="relative w-full h-full rounded-[24px] overflow-hidden bg-black">
-                                <img src="/assets/avatar-sobre.webp" alt={t.about.avatarAlt} width="220" height="220"
-                                     className="w-full h-full object-cover scale-[1.3] translate-y-[5%]"/>
+                                <img src="/assets/avatar-sorriso.webp" alt={t.about.avatarAlt} width="220" height="220"
+                                     className="w-full h-full object-cover translate-y-[3%]"/>
                                 <div aria-hidden="true" className="absolute inset-0 rounded-[24px] pointer-events-none"
                                      style={{
                                          background: 'linear-gradient(160deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 28%, transparent 46%)',
