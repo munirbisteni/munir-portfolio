@@ -5,29 +5,31 @@ import HackerRoom from "../components/HackerRoom.jsx";
 import CanvasLoader from "../components/CanvasLoader.jsx";
 import {useMediaQuery} from "react-responsive";
 import {calculateSizes} from "../constants/index.js";
-import Target from "../components/Target.jsx";
-import ReactLogo from "../components/ReactLogo.jsx";
-import Cube from "../components/Cube.jsx";
-import Rings from "../components/Rings.jsx";
 import HeroCamera from "../components/HeroCamera.jsx";
+import HeroObjects from "../components/HeroObjects.jsx";
 import Button from "../components/Button.jsx";
 import SceneErrorBoundary from "../components/SceneErrorBoundary.jsx";
+import {useLanguage} from "../i18n/LanguageContext.jsx";
 
 const Hero = () => {
+    const {t} = useLanguage();
 
     const isSmall = useMediaQuery({maxWidth: 440})
     const isMobile = useMediaQuery({maxWidth: 768});
     const isTables = useMediaQuery({minWidth: 768, maxWidth: 1024});
+    const isShort = useMediaQuery({maxHeight: 820});
 
-    const sizes = calculateSizes(isSmall, isMobile, isTables);
+    const sizes = calculateSizes(isSmall, isMobile, isTables, isShort);
 
     return (
         <section className="min-h-screen w-full flex flex-col relative" id="home">
             <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
-                <p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">Hi, i am Munir <span className="waving-hand">👋</span></p>
-                <div className="mt[-5px]">
-                    <p className="hero_tag text-gray_gradient">Beyond Code: </p>
-                    <p className="hero_tag text-gray_gradient">Creating Impact </p>
+                <div className="relative z-10 pointer-events-none flex flex-col gap-3">
+                <p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">{t.hero.greeting} <span className="waving-hand">👋</span></p>
+                <div className="-mt-1">
+                    <h1 className="hero_tag text-gray_gradient">{t.hero.line1}</h1>
+                    <p className="hero_tag text-gray_gradient">{t.hero.line2}</p>
+                </div>
                 </div>
 
 
@@ -46,12 +48,7 @@ const Hero = () => {
                                     rotation={[0, -Math.PI, 0]}
                                 />
                             </HeroCamera>
-                            <group>
-                                <SceneErrorBoundary><ReactLogo position = {sizes.reactLogoPosition} /></SceneErrorBoundary>
-                                <SceneErrorBoundary><Target position = {sizes.targetPosition} /></SceneErrorBoundary>
-                                <SceneErrorBoundary><Cube position = {sizes.cubePosition} /></SceneErrorBoundary>
-                                <SceneErrorBoundary><Rings position = {sizes.ringPosition} /></SceneErrorBoundary>
-                            </group>
+                            <HeroObjects/>
                             <ambientLight intensity= {1}/>
                             <directionalLight position = {[10, 10, 10]} intensity ={0.5}/>
                         </Suspense>
@@ -60,7 +57,7 @@ const Hero = () => {
                 </div>
                 <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
                     <a href="#contact" className="w-fit">
-                        <Button name="Let's work together" isBeam containerClass = "sm:w-fit w-full sm:min-w-96"/>
+                        <Button name={t.hero.cta} isBeam containerClass = "sm:w-fit w-full sm:min-w-96"/>
 
                     </a>
                 </div>

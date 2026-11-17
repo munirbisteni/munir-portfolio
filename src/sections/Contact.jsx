@@ -1,7 +1,10 @@
 import React, {useRef, useState} from 'react'
-import {useGLTF} from "@react-three/drei";
 import emailjs from '@emailjs/browser'
+import {useLanguage} from "../i18n/LanguageContext.jsx";
+import {contactInfo} from "../constants/index.js";
+
 const Contact = () => {
+    const {t} = useLanguage();
     const formRef = useRef();
 
     const [loading, setLoading] = useState(false)
@@ -27,25 +30,31 @@ const Contact = () => {
                 );
 
             setLoading(false);
-            alert('Your message has been sent!');
+            setForm({name: '', email: '', message: ''});
+            alert(t.contact.success);
 
         } catch(error){
             setLoading(false);
             console.log(error);
-            alert('Something went wrong!');
+            alert(t.contact.error);
         }
     }
-    // service_kkhsc3a
     return (
         <section className="c-space my-20" id="contact">
             <div className="relative min-h-screen flex items-center justify-center flex-col">
-                <img src="/assets/terminal.png" alt="terminal background" className="absolute inset-0 min-h-screen"/>
+                <img src="/assets/terminal.png" alt="" className="absolute inset-0 min-h-screen"/>
                 <div className="contact-container">
-                    <h3 className="head-text">Let's talk</h3>
-                    <p className="text-lg text-white-600">Have a project, an idea, or just want to chat about tech? I’m always open to meaningful conversations and challenges. Let’s make something great together!</p>
+                    <h2 className="head-text">{t.contact.title}</h2>
+                    <p className="text-lg text-white-600 mt-3">{t.contact.text}</p>
+                    <p className="text-white-600 mt-3">
+                        {t.contact.direct}{' '}
+                        <a href={`mailto:${contactInfo.email}`} className="text-white hover:underline">{contactInfo.email}</a>
+                        {' · '}
+                        <a href={contactInfo.whatsapp} target="_blank" rel="noreferrer" className="text-white hover:underline">WhatsApp {contactInfo.phone}</a>
+                    </p>
                     <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col space-y-7">
                         <label className='space-y-3'>
-                            <span className="field-label">Full Name</span>
+                            <span className="field-label">{t.contact.name}</span>
                             <input
                                 type="text"
                                 name="name"
@@ -53,11 +62,11 @@ const Contact = () => {
                                 onChange={handleChange}
                                 required
                                 className="field-input"
-                                placeholder="Your name..."
+                                placeholder={t.contact.namePh}
                             />
                         </label>
                         <label className='space-y-3'>
-                            <span className="field-label">Email</span>
+                            <span className="field-label">{t.contact.email}</span>
                             <input
                                 type="email"
                                 name="email"
@@ -65,11 +74,11 @@ const Contact = () => {
                                 onChange={handleChange}
                                 required
                                 className="field-input"
-                                placeholder="example@gmail.com"
+                                placeholder={t.contact.emailPh}
                             />
                         </label>
                         <label className='space-y-3'>
-                            <span className="field-label">Your message</span>
+                            <span className="field-label">{t.contact.message}</span>
                             <textarea
                                 name="message"
                                 value={form.message}
@@ -77,12 +86,12 @@ const Contact = () => {
                                 required
                                 rows={5}
                                 className="field-input"
-                                placeholder="Hi, I wanna contact you about..."
+                                placeholder={t.contact.messagePh}
                             />
                         </label>
                         <button className="field-btn" type="submit" disabled={loading}>
-                            {loading ? 'Sending...': 'Send Message'}
-                            <img  src="/assets/arrow-up.png" alt="arrow-up" className="field-btn_arrow"/>
+                            {loading ? t.contact.sending : t.contact.send}
+                            <img  src="/assets/arrow-up.png" alt="" className="field-btn_arrow"/>
                         </button>
                     </form>
                 </div>

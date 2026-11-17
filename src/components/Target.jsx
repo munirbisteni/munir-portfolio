@@ -12,13 +12,13 @@ const RINGS = [
     {radius: 0.2, color: '#e63946'},
 ];
 
-const Target = (props) => {
+const Target = ({scale = 1.5, ...props}) => {
     const targetRef = useRef();
 
     useGSAP(() => {
         gsap.to(
             targetRef.current.position, {
-                y: targetRef.current.position.y + 0.5,
+                y: 0.5,
                 duration: 1.5,
                 repeat: -1,
                 yoyo: true
@@ -26,7 +26,9 @@ const Target = (props) => {
     })
 
     return (
-        <group {...props} rotation={[0, Math.PI / 5, 0]} scale={1.5} ref={targetRef}>
+        // A animação de flutuar fica no grupo interno, para não brigar com a posição recebida.
+        <group {...props} rotation={[0, Math.PI / 5, 0]} scale={scale}>
+        <group ref={targetRef}>
             {/* face do alvo */}
             <group position={[0, 1.6, 0]}>
                 {RINGS.map(({radius, color}, i) => (
@@ -45,6 +47,7 @@ const Target = (props) => {
                 <cylinderGeometry args={[0.5, 0.6, 0.12, 32]}/>
                 <meshStandardMaterial color="#5d4037"/>
             </mesh>
+        </group>
         </group>
     )
 }

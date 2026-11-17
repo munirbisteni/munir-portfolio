@@ -1,47 +1,64 @@
 import React from 'react'
 import {navLinks} from "../constants/index.js";
+import {useLanguage} from "../i18n/LanguageContext.jsx";
+
+const LanguageToggle = () => {
+    const {lang, t, toggleLang} = useLanguage();
+    return (
+        <button onClick={toggleLang}
+                className="flex items-center rounded-full border border-black-300 bg-black-200 p-0.5 text-sm font-medium"
+                aria-label={t.nav.switchLanguage}
+                title={t.nav.switchLanguage}>
+            {['pt', 'en'].map((code) => (
+                <span key={code}
+                      className={`px-2.5 py-1 rounded-full uppercase transition-colors ${lang === code ? 'bg-white text-black' : 'text-neutral-400'}`}>
+                    {code}
+                </span>
+            ))}
+        </button>
+    );
+};
 
 const Navbar = () => {
+    const {t} = useLanguage();
     const [isOpen, setIsOpen] = React.useState(false);
 
-    const toggleMenu = () => { setIsOpen((prevIsOpen) => !prevIsOpen); };
-    const NavItems = () => {
-        return (
-            <ul className="nav-ul">
-                {navLinks.map(({id, href, name}) => (
-                    <li key={id} className="nav-li">
-                        <a href={href} className="nav-li_a">{name}</a>
-                    </li>
-                ))}
-            </ul>
-        )
-    }
+    const toggleMenu = () => setIsOpen((prev) => !prev);
+
+    const NavItems = () => (
+        <ul className="nav-ul">
+            {navLinks.map(({id, href, key}) => (
+                <li key={id} className="nav-li">
+                    <a href={href} className="nav-li_a" onClick={() => setIsOpen(false)}>{t.nav[key]}</a>
+                </li>
+            ))}
+        </ul>
+    );
+
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-black/90">
             <div className="max-w-7xl mx-auto">
-                <div className="flex justify-between itens-center py-5 mx-auto c-space">
-                     <a href="/" className="text-neutral-400 font-bold text-xl hover:text-white transition-colors">
-                         Munir Bisteni
-                     </a>
+                <div className="flex justify-between items-center py-5 mx-auto c-space">
+                    <a href="#home" className="text-neutral-400 font-bold text-xl hover:text-white transition-colors">
+                        Munir Bisteni
+                    </a>
 
-                    <button onClick={toggleMenu}
-                            className="text-neutral-400
-                                        focus:outline-none
-                                        hover:text-white
-                                        transition-colors
-                                        sm:hidden flex"
-                            aria-label="Toggle Menu">
-                        <img src={isOpen ? "assets/close.svg" : "assets/menu.svg"} alt="toggle" className="w-6 h-6"/>
-                    </button>
-
-                    <nav className="sm:flex hidden">
-                        <NavItems/>
-                    </nav>
+                    <div className="flex items-center gap-4">
+                        <nav className="sm:flex hidden">
+                            <NavItems/>
+                        </nav>
+                        <LanguageToggle/>
+                        <button onClick={toggleMenu}
+                                className="text-neutral-400 focus:outline-none hover:text-white transition-colors sm:hidden flex"
+                                aria-label={t.nav.toggleMenu}>
+                            <img src={isOpen ? "/assets/close.svg" : "/assets/menu.svg"} alt="" className="w-6 h-6"/>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div className={`nav-sidebar ${isOpen? 'max-h-screen' : 'max-h-0'}`}>
+            <div className={`nav-sidebar ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
                 <nav className="p-5">
-                    <NavItems />
+                    <NavItems/>
                 </nav>
             </div>
         </header>
