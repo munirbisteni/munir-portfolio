@@ -11,10 +11,12 @@ import Button from "../components/Button.jsx";
 import SceneErrorBoundary from "../components/SceneErrorBoundary.jsx";
 import {useLanguage} from "../i18n/LanguageContext.jsx";
 import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion.js";
+import useInView from "../hooks/useInView.js";
 
 const Hero = () => {
     const {t} = useLanguage();
     const reducedMotion = usePrefersReducedMotion();
+    const [sectionRef, inView] = useInView();
 
     const isSmall = useMediaQuery({maxWidth: 440})
     const isMobile = useMediaQuery({maxWidth: 768});
@@ -24,7 +26,7 @@ const Hero = () => {
     const sizes = calculateSizes(isSmall, isMobile, isTables, isShort);
 
     return (
-        <section className="min-h-screen w-full flex flex-col relative" id="home">
+        <section ref={sectionRef} className="min-h-screen w-full flex flex-col relative" id="home">
             <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
                 <div className="relative z-10 pointer-events-none flex flex-col gap-3">
                 <p className="sm:text-3xl text-xl font-medium text-white text-center font-generalsans">{t.hero.greeting} <span className="waving-hand">👋</span></p>
@@ -37,7 +39,7 @@ const Hero = () => {
 
                 <div className="w-full h-full absolute inset-0">
                     <SceneErrorBoundary>
-                    <Canvas className="w-full h-full" frameloop={reducedMotion ? 'demand' : 'always'}>
+                    <Canvas className="w-full h-full" dpr={isMobile ? [1, 1.25] : [1, 1.5]} frameloop={reducedMotion || !inView ? 'demand' : 'always'}>
                         <Suspense fallback={<CanvasLoader />}>
                             <PerspectiveCamera makeDefault position={[0, 0, 20]}/>
                             <HeroCamera isMobile = {isMobile}>

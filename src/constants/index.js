@@ -20,14 +20,14 @@ export const techStack = [
     'Linux', 'Docker', 'WordPress', 'Web Scraping',
 ];
 
-// Telas do Capim (mockups do tema escuro, 390 × 844)
+// Telas do Capim (mockups do tema escuro, 390 × 844, exportados em WebP 2x: SVGs complexos pesavam no celular)
 export const capimScreens = [
-    '/projects/capim/01-mes.svg',
-    '/projects/capim/02-container.svg',
-    '/projects/capim/04-voz.svg',
-    '/projects/capim/06-relatorios.svg',
-    '/projects/capim/07-investimentos.svg',
-    '/projects/capim/08-fechamento-mes.svg',
+    '/projects/capim/01-mes.webp',
+    '/projects/capim/02-container.webp',
+    '/projects/capim/04-voz.webp',
+    '/projects/capim/06-relatorios.webp',
+    '/projects/capim/07-investimentos.webp',
+    '/projects/capim/08-fechamento-mes.webp',
 ];
 
 export const capimTags = ['React Native', 'Expo', 'TypeScript', 'Node.js', 'MongoDB', 'Claude API'];

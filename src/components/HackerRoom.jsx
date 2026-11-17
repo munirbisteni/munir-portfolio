@@ -17,7 +17,10 @@ const HackerRoom = (props) => {
             <mesh geometry={nodes.screen_screens_0.geometry} material={materials.screens}>
                 <meshMatcapMaterial map={screenTxt} />
             </mesh>
-            <mesh geometry={nodes.screen_glass_glass_0.geometry} material={materials.glass} />
+            <mesh geometry={nodes.screen_glass_glass_0.geometry}>
+                {/* Vidro simples: o material original (transmission) dobrava o custo de cada quadro */}
+                <meshStandardMaterial color="#ffffff" transparent opacity={0.12} roughness={0.1} metalness={0.2}/>
+            </mesh>
             <mesh geometry={nodes.table_table_mat_0_1.geometry} material={materials.table_mat} />
             <mesh geometry={nodes.table_table_mat_0_2.geometry} material={materials.computer_mat}>
                 <meshMatcapMaterial map={monitortxt} />

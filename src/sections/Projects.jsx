@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {capimScreens, capimTags, otherProjects} from "../constants/index.js";
 import {useLanguage} from "../i18n/LanguageContext.jsx";
 import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion.js";
+import useInView from "../hooks/useInView.js";
 
 const Tag = ({children}) => (
     <li className="text-xs text-white-700 bg-black-300 rounded-md px-2.5 py-1">{children}</li>
@@ -13,14 +14,15 @@ const CapimPreview = () => {
     const [index, setIndex] = useState(0);
     const [paused, setPaused] = useState(false);
     const reducedMotion = usePrefersReducedMotion();
+    const [previewRef, inView] = useInView();
     const touchStart = useRef(null);
     const total = capimScreens.length;
 
     useEffect(() => {
-        if (paused || reducedMotion) return;
+        if (paused || reducedMotion || !inView) return;
         const id = setInterval(() => setIndex((i) => (i + 1) % total), 3500);
         return () => clearInterval(id);
-    }, [paused, reducedMotion, total]);
+    }, [paused, reducedMotion, inView, total]);
 
     const go = (step) => setIndex((i) => (i + step + total) % total);
 
@@ -34,7 +36,7 @@ const CapimPreview = () => {
     };
 
     return (
-        <div className="flex flex-col items-center gap-4"
+        <div ref={previewRef} className="flex flex-col items-center gap-4"
              onMouseEnter={() => setPaused(true)}
              onMouseLeave={() => setPaused(false)}>
             <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}

@@ -1,14 +1,17 @@
-import React, {useCallback, useRef} from 'react'
+import React, {useCallback, useEffect, useRef} from 'react'
 import Globe from "react-globe.gl";
 
 // Globo decorativo: começa sobre Valinhos, gira sozinho e não responde a toque/mouse.
 // Fica num arquivo separado para ser baixado só quando aparece na tela (ver LazyGlobe).
-const SpinningGlobe = ({size, label, rotate}) => {
+// `active` = está visível; fora da tela a animação para, para não pesar na rolagem do celular.
+const SpinningGlobe = ({size, label, rotate, active}) => {
     const globeRef = useRef();
 
     const handleGlobeReady = useCallback(() => {
         const globe = globeRef.current;
         if (!globe) return;
+        // Telas de celular têm densidade 3x; desenhar o globo em 1,5x já fica nítido e custa bem menos.
+        globe.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
         globe.pointOfView({lat: -22.97, lng: -46.99, altitude: 2.2}, 0);
         const controls = globe.controls();
         controls.autoRotate = rotate;
@@ -18,11 +21,18 @@ const SpinningGlobe = ({size, label, rotate}) => {
         controls.enablePan = false;
     }, [rotate]);
 
+    useEffect(() => {
+        const globe = globeRef.current;
+        if (!globe) return;
+        if (active) globe.resumeAnimation(); else globe.pauseAnimation();
+    }, [active]);
+
     return (
         <Globe
             ref={globeRef}
             onGlobeReady={handleGlobeReady}
             enablePointerInteraction={false}
+            rendererConfig={{antialias: false, alpha: true, powerPreference: 'low-power'}}
             height={size}
             width={size}
             backgroundColor="rgba(0,0,0,0)"

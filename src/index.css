@@ -168,6 +168,17 @@ body {
   @apply text-white;
 }
 
+/* Globo leve do celular: o mapa desliza uma volta inteira (ver components/CssGlobe.jsx) */
+.css-globe-map {
+  animation: css-globe-spin 60s linear infinite;
+  will-change: transform;
+}
+
+@keyframes css-globe-spin {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--globe-shift)); }
+}
+
 .waving-hand {
   animation-name: wave-animation;
   animation-duration: 2.5s;
