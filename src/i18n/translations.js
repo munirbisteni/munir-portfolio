@@ -37,7 +37,7 @@ export const translations = {
         },
         projects: {
             title: 'Projetos',
-            subtitle: 'Projetos pessoais e voluntários, do design à publicação.',
+            subtitle: 'Projetos pessoais, voluntários e de pesquisa.',
             featured: 'Em destaque',
             screens: 'Telas',
             viewSite: 'Ver site',
@@ -55,10 +55,14 @@ export const translations = {
                 tag: 'Voluntário · IBAVIVA',
                 desc: 'Site para apresentar os missionários apoiados pela igreja durante um ciclo de pregações sobre missões. Fiz de ponta a ponta, em uma semana e sem custo de infraestrutura: design, desenvolvimento e publicação.',
             },
-            pi: {
-                tag: 'Acadêmico · PUC-Campinas',
-                title: 'Companhia aérea',
-                desc: 'Projeto Integrador: sistema de compra de passagens aéreas, com front-end e API em TypeScript/Express. Feito em dupla.',
+            ic: {
+                tag: 'Pesquisa · Iniciação científica · USF · 2026',
+                title: 'Medidas de personalidade com PLN',
+                desc: 'Iniciação científica em Psicologia, com orientação do Prof. Víthor Rosa Franco. Investiga se o que as pessoas escrevem livremente (uma descrição da própria personalidade e as memórias mais antigas da infância) permite medir os cinco grandes fatores da personalidade. Os textos são analisados com processamento de linguagem natural (LDA e modelos de Rasch-Poisson) e comparados aos escores do BFI-2-S, um questionário validado, numa amostra planejada de 300 participantes.',
+                tags: ['PLN', 'Psicometria', 'LDA', 'Rasch-Poisson', 'Big Five'],
+                question: '“Como você descreveria, em detalhes, sua personalidade?”',
+                method: 'PLN',
+                factors: ['Abertura', 'Conscienciosidade', 'Extroversão', 'Amabilidade', 'Neuroticismo'],
             },
         },
         work: {
@@ -81,7 +85,7 @@ export const translations = {
             ],
             educationTitle: 'Formação',
             education: [
-                {name: 'Psicologia', school: 'Universidade São Francisco (USF)', period: 'em andamento · conclusão prevista em 2030'},
+                {name: 'Psicologia', school: 'Universidade São Francisco (USF)', period: 'em andamento · conclusão prevista em 2030', note: 'Iniciação científica (2026): medidas de personalidade com processamento de linguagem natural'},
                 {name: 'Técnico em Desenvolvimento de Software', school: 'Colégio Técnico de Campinas (Cotuca) – Unicamp', period: '2023–2024'},
                 {name: 'Engenharia de Software', school: 'PUC-Campinas', period: '2023–2024 · incompleto'},
             ],
@@ -145,7 +149,7 @@ export const translations = {
         },
         projects: {
             title: 'Projects',
-            subtitle: 'Personal and volunteer projects, from design to deployment.',
+            subtitle: 'Personal, volunteer and research projects.',
             featured: 'Featured',
             screens: 'Screens',
             viewSite: 'Visit site',
@@ -163,10 +167,14 @@ export const translations = {
                 tag: 'Volunteer · IBAVIVA',
                 desc: 'A website presenting the missionaries supported by the church during a sermon series on missions. Built end to end in one week at zero infrastructure cost: design, development and deployment.',
             },
-            pi: {
-                tag: 'Academic · PUC-Campinas',
-                title: 'Airline booking',
-                desc: 'Capstone project: an airline ticket booking system, with front end and API in TypeScript/Express. Built as a pair.',
+            ic: {
+                tag: 'Research · Undergraduate research · USF · 2026',
+                title: 'Measuring personality with NLP',
+                desc: 'Undergraduate research project in Psychology, supervised by Prof. Víthor Rosa Franco. It investigates whether what people write freely (a description of their own personality and their earliest childhood memories) can measure the Big Five personality traits. The texts are analyzed with natural language processing (LDA and Rasch-Poisson models) and compared with scores on the BFI-2-S, a validated questionnaire, in a planned sample of 300 participants.',
+                tags: ['NLP', 'Psychometrics', 'LDA', 'Rasch-Poisson', 'Big Five'],
+                question: '“How would you describe your personality in detail?”',
+                method: 'NLP',
+                factors: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
             },
         },
         work: {
@@ -189,7 +197,7 @@ export const translations = {
             ],
             educationTitle: 'Education',
             education: [
-                {name: 'Psychology', school: 'Universidade São Francisco (USF)', period: 'in progress · expected 2030'},
+                {name: 'Psychology', school: 'Universidade São Francisco (USF)', period: 'in progress · expected 2030', note: 'Undergraduate research (2026): measuring personality with natural language processing'},
                 {name: 'Software Development Technician', school: 'Colégio Técnico de Campinas (Cotuca) – Unicamp', period: '2023–2024'},
                 {name: 'Software Engineering', school: 'PUC-Campinas', period: '2023–2024 · not completed'},
             ],

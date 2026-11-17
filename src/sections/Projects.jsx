@@ -50,6 +50,29 @@ const CapimPreview = () => {
     );
 };
 
+// Ilustração da iniciação científica: pergunta aberta → PLN → cinco grandes fatores.
+const FACTOR_COLORS = ['#7dd3fc', '#a7f3d0', '#fde68a', '#f9a8d4', '#c4b5fd'];
+const IcVisual = ({text}) => (
+    <div className="w-full aspect-[16/10] rounded-md border border-black-300 bg-gradient-to-br from-black-300 to-black-200 flex flex-col justify-center gap-4 sm:p-6 p-4" aria-hidden="true">
+        <p className="rounded-lg rounded-bl-none bg-black-500/60 px-4 py-3 text-white-800 sm:text-lg text-sm italic w-fit max-w-[90%]">
+            {text.question}
+        </p>
+        <div className="flex items-center gap-3 text-white-500 text-sm">
+            <span className="h-px flex-1 bg-black-500"/>
+            <span className="rounded-full border border-black-500 px-3 py-0.5 text-white-700">{text.method}</span>
+            <span className="h-px flex-1 bg-black-500"/>
+        </div>
+        <ul className="flex flex-wrap gap-2 justify-center">
+            {text.factors.map((factor, i) => (
+                <li key={factor} className="flex items-center gap-1.5 rounded-full bg-black-300 px-3 py-1 sm:text-sm text-xs text-white-700">
+                    <span className="h-2 w-2 rounded-full" style={{backgroundColor: FACTOR_COLORS[i]}}/>
+                    {factor}
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+
 const Projects = () => {
     const {t} = useLanguage();
 
@@ -84,8 +107,9 @@ const Projects = () => {
 
             {/* Outros projetos */}
             <div className="mt-5 grid md:grid-cols-2 grid-cols-1 gap-5">
-                {otherProjects.map(({key, title, image, href, code, tags}) => {
+                {otherProjects.map(({key, title, image, visual, href, code, tags}) => {
                     const text = t.projects[key];
+                    const tagList = tags ?? text.tags ?? [];
                     return (
                         <article key={key} className="grid-container">
                             {image && (
@@ -94,14 +118,15 @@ const Projects = () => {
                                          className="w-full aspect-[16/10] object-cover object-top hover:scale-105 transition-transform duration-500"/>
                                 </a>
                             )}
+                            {visual === 'ic' && <IcVisual text={text}/>}
                             <div className="flex flex-col gap-3 flex-1">
                                 <p className="text-xs uppercase tracking-wider text-white-500">{text.tag}</p>
                                 <h3 className="grid-headtext !mb-0">{title ?? text.title}</h3>
                                 <p className="grid-subtext">{text.desc}</p>
                                 <ul className="flex flex-wrap gap-2">
-                                    {tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                                    {tagList.map((tag) => <Tag key={tag}>{tag}</Tag>)}
                                 </ul>
-                                <div className="flex gap-5 mt-auto pt-2">
+                                {(href || code) && <div className="flex gap-5 mt-auto pt-2">
                                     {href && (
                                         <a href={href} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white hover:underline">
                                             {t.projects.viewSite}
@@ -114,7 +139,7 @@ const Projects = () => {
                                             <img src="/assets/arrow-up.png" alt="" className="w-3 h-3"/>
                                         </a>
                                     )}
-                                </div>
+                                </div>}
                             </div>
                         </article>
                     );

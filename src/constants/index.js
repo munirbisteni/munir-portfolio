@@ -41,9 +41,8 @@ export const otherProjects = [
         tags: ['React', 'Next.js', 'Vercel'],
     },
     {
-        key: 'pi',
-        code: 'https://github.com/munirbisteni/PI2-PUCC',
-        tags: ['TypeScript', 'Express', 'HTML/CSS'],
+        key: 'ic',
+        visual: 'ic',
     },
 ];
 

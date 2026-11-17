@@ -40,11 +40,12 @@ const Experience = () => {
                     <aside className="rounded-lg bg-black-200 border border-black-300 sm:p-7 p-5 flex flex-col gap-6">
                         <div className="flex flex-col gap-4">
                             <p className="text-xl font-bold text-white-800">{w.educationTitle}</p>
-                            {w.education.map(({name, school, period}) => (
+                            {w.education.map(({name, school, period, note}) => (
                                 <div key={name}>
                                     <p className="font-semibold text-white-800">{name}</p>
                                     <p className="text-sm">{school}</p>
                                     <p className="text-sm text-white-500">{period}</p>
+                                    {note && <p className="text-sm text-white-700 mt-1">{note}</p>}
                                 </div>
                             ))}
                         </div>

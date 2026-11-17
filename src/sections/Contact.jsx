@@ -41,9 +41,14 @@ const Contact = () => {
     }
     return (
         <section className="c-space my-20" id="contact">
-            <div className="relative min-h-screen flex items-center justify-center flex-col">
-                <img src="/assets/terminal.png" alt="" className="absolute inset-0 min-h-screen"/>
-                <div className="contact-container">
+            {/* Janela de terminal feita em CSS: acompanha a altura do conteúdo em qualquer tela */}
+            <div className="max-w-3xl mx-auto rounded-2xl border border-black-300 bg-black-200 overflow-hidden shadow-2xl shadow-black">
+                <div className="flex items-center gap-2 px-4 h-10 border-b border-black-300 bg-gradient-to-r from-black-300 via-[#2a2a31] to-black-300" aria-hidden="true">
+                    <span className="h-3 w-3 rounded-full bg-[#ff5f57]"/>
+                    <span className="h-3 w-3 rounded-full bg-[#febc2e]"/>
+                    <span className="h-3 w-3 rounded-full bg-[#28c840]"/>
+                </div>
+                <div className="max-w-xl mx-auto sm:px-10 px-5 sm:py-14 py-8">
                     <h2 className="head-text">{t.contact.title}</h2>
                     <p className="text-lg text-white-600 mt-3">{t.contact.text}</p>
                     <p className="text-white-600 mt-3">
@@ -52,7 +57,7 @@ const Contact = () => {
                         {' · '}
                         <a href={contactInfo.whatsapp} target="_blank" rel="noreferrer" className="text-white hover:underline">WhatsApp {contactInfo.phone}</a>
                     </p>
-                    <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col space-y-7">
+                    <form ref={formRef} onSubmit={handleSubmit} className="sm:mt-12 mt-8 flex flex-col space-y-7">
                         <label className='space-y-3'>
                             <span className="field-label">{t.contact.name}</span>
                             <input
@@ -89,7 +94,7 @@ const Contact = () => {
                                 placeholder={t.contact.messagePh}
                             />
                         </label>
-                        <button className="field-btn" type="submit" disabled={loading}>
+                        <button className="field-btn hover:bg-white-500 transition-colors" type="submit" disabled={loading}>
                             {loading ? t.contact.sending : t.contact.send}
                             <img  src="/assets/arrow-up.png" alt="" className="field-btn_arrow"/>
                         </button>
